@@ -1,21 +1,35 @@
 import { clsx } from 'clsx';
-import { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes, ReactNode } from 'react';
 
 
-export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
-
+export interface TextInputInputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
-export function TextInput(props: TextInputProps) {
 
+export interface TextInputRootProps {
+    children: ReactNode;
+}
+
+
+function TextInputRoot(props: TextInputRootProps) {
     return (
-        <input
+        <div className='flex items-center py-3 px-2 gap-2 bg-gray-800 rounded  w-full focus-within:ring-2 ring-cyan-300'>
+            {props.children}
+        </div>
+    )
+}
+// function TextInputIcon() { }
 
-            className={
-                clsx(
-                    'py-3 px-2 bg-gray-800 rounded text-gray-100 text-xs w-full placeholder-gray-400',
-                )}
+function TextInputInput(props: TextInputInputProps) {
+    return (
+        <input className='bg-transparent flex-1 outline-none  text-gray-100 text-xs  placeholder-gray-400'
+
             {...props}
         />
-
     );
+}
+
+export const TextInput = {
+    Root: TextInputRoot,
+    Input: TextInputInput,
+    // ICON
 }
